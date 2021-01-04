@@ -4,7 +4,7 @@ let pose;
 let skeleton;
 
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(760, 480);
   video = createCapture(VIDEO);
   video.hide();
   poseNet = ml5.poseNet(video, modelLoaded);
