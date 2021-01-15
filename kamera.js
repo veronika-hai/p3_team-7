@@ -16,7 +16,7 @@ let saveButton;
 
 function modelReady() {
   console.log('Model is ready!!!');
- // classifier.load('model.js', customModelReady);
+ classifier.load('model.json', customModelReady);
 }
 
 function customModelReady(){
@@ -28,9 +28,9 @@ function videoReady() {
 }
 
 function setup() {
-  createCanvas(1280, 720);
+  createCanvas(640, 480);
   video = createCapture(VIDEO);
-  video.size(1280, 720);
+  video.size(640, 480);
   video.hide();
   //
   detector = ml5.objectDetector('cocossd');
