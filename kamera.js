@@ -16,6 +16,11 @@ let saveButton;
 
 function modelReady() {
   console.log('Model is ready!!!');
+  classifier.load('model.js', customModelReady);
+}
+
+function customModelReady(){
+  console.log('Custom Model is ready!');
 }
 
 function videoReady() {
