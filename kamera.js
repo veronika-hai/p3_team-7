@@ -7,10 +7,11 @@ let detections = [];
 // Bilderkennung => Gestenerkennung
 let mobilenet;
 let classifier;
-let label = 'test';
+let label;
 let helpButton;   // wenn man die Hilfe Geste macht
 let endButton;    // wenn man die Projektion auflöst
 let normalButton; // wenn man gar keine Geste macht 
+let saveButton;
 
 
 function modelReady() {
@@ -21,6 +22,46 @@ function videoReady() {
   console.log('Video is ready!!!');
 }
 
+function setup() {
+  createCanvas(640, 480);
+  video = createCapture(VIDEO);
+  video.size(640, 480);
+  video.hide();
+  //
+  detector = ml5.objectDetector('cocossd');
+  detector.detect(video, gotDetections);
+  //
+  mobilenet = ml5.featureExtractor('MobileNet', modelReady);
+  classifier = mobilenet.classification(video, videoReady);
+  
+
+// Buttons zum lernen 
+  helpButton = createButton('Hilfe');
+  helpButton.mousePressed(function() {
+    classifier.addImage('Hilfe');
+  });
+
+  endButton = createButton('Ende');
+  endButton.mousePressed(function() {
+    classifier.addImage('Ende');
+  });
+
+  normalButton = createButton('Normal');
+  normalButton.mousePressed(function(){
+    classifier.addImage('Normal');
+  })
+
+  trainButton = createButton('train');
+  trainButton.mousePressed(function() {
+    classifier.train(whileTraining);
+  });
+  
+  saveButton = createButton('save');
+  saveButton.mousePressed(function() {
+    classifier.save();
+  });
+}
+
 function whileTraining(loss) {
   if (loss == null) {
     console.log('Training Complete');
@@ -29,6 +70,8 @@ function whileTraining(loss) {
     console.log(loss);
   }
 }
+
+//BILDERKENNUNG
 
 function gotResults(error, result) {
   if (error) {
@@ -49,38 +92,6 @@ function gotDetections(error, results) {
   }
   detections = results;
   detector.detect(video, gotDetections);
-}
-
-function setup() {
-  createCanvas(640, 480);
-  video = createCapture(VIDEO);
-  video.size(640, 480);
-  video.hide();
-  detector = ml5.objectDetector('cocossd');
-  mobilenet = ml5.featureExtractor('MobileNet', modelReady);
-  classifier = mobilenet.classification(video, videoReady);
-  detector.detect(video, gotDetections);
-
-  
-  helpButton = createButton('Hilfe');
-  helpButton.mousePressed(function() {
-    classifier.addImage('Hilfe');
-  });
-
-  endButton = createButton('Ende');
-  endButton.mousePressed(function() {
-    classifier.addImage('Ende');
-  });
-
-  normalButton = createButton('Normal');
-  normalButton.mousePressed(function(){
-    classifier.addImage('Normal');
-  })
-
-  trainButton = createButton('train');
-  trainButton.mousePressed(function() {
-    classifier.train(whileTraining);
-  });
 }
 
 function draw() {
