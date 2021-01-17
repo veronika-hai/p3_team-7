@@ -8,79 +8,80 @@ let detections = [];
 let mobilenet;
 let classifier;
 let label;
-let helpButton;   // wenn man die Hilfe Geste macht
-let endButton;    // wenn man die Projektion auflöst
-let normalButton; // wenn man gar keine Geste macht 
+let helpButton; // wenn man die Hilfe Geste macht
+let endButton; // wenn man die Projektion auflöst
+let normalButton; // wenn man gar keine Geste macht
 let saveButton;
 
+function preload() {
+  detector = ml5.objectDetector("cocossd");
+  mobilenet = ml5.featureExtractor("MobileNet", { numLabels: 3 }, modelReady);
+}
 
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
   video.size(640, 480);
   video.hide();
-  
-  detector = ml5.objectDetector('cocossd');
-  detector.detect(video, gotDetections);
 
-  mobilenet = ml5.featureExtractor('MobileNet', modelReady);
+  detector.detect(video, gotDetections);
   classifier = mobilenet.classification(video, videoReady);
-  
+
   let counth = 0;
-  let counte = 0; 
+  let counte = 0;
   let countn = 0;
 
-// Buttons zum lernen 
-  helpButton = createButton('Hilfe');
-  helpButton.mousePressed(function() {
+  // Buttons zum lernen
+  helpButton = createButton("Hilfe");
+  helpButton.mousePressed(function () {
     counth += 1;
-    classifier.addImage('Hilfe');
-    console.log('Hilfe-Bilder: ' + counth);
+    classifier.addImage("Hilfe");
+    console.log("Hilfe-Bilder: " + counth);
   });
 
-  endButton = createButton('Ende');
-  endButton.mousePressed(function() {
+  endButton = createButton("Ende");
+  endButton.mousePressed(function () {
     counte += 1;
-    classifier.addImage('Ende');
-    console.log('Ende_Bilder: ' + counte);
+    classifier.addImage("Ende");
+    console.log("Ende_Bilder: " + counte);
   });
 
-  normalButton = createButton('Normal');
-  normalButton.mousePressed(function(){
+  normalButton = createButton("Normal");
+  normalButton.mousePressed(function () {
     countn += 1;
-    classifier.addImage('Normal');
-    console.log('Normal-Bilder: ' + countn);
-  })
+    classifier.addImage("bliblablub");
+    console.log("Normal-Bilder: " + countn);
+  });
 
-  trainButton = createButton('train');
-  trainButton.mousePressed(function() {
+  trainButton = createButton("train");
+  trainButton.mousePressed(function () {
     classifier.train(whileTraining);
   });
-  
-  saveButton = createButton('save');
-  saveButton.mousePressed(function() {
+
+  saveButton = createButton("save");
+  saveButton.mousePressed(function () {
     classifier.save();
   });
 }
 
 function modelReady() {
-  console.log('Model is ready!!!');
- //classifier.load('model.json', customModelReady);
+  console.log("Model is ready!!!");
+  //classifier.load('model.json', customModelReady);
 }
 
-function customModelReady(){
-  console.log('Custom Model is ready!');
+function customModelReady() {
+  console.log("Custom Model is ready!");
 }
 
 function videoReady() {
-  console.log('Video is ready!!!');
+  console.log("Video is ready!!!");
 }
 
-// Machine Learning 
+// Machine Learning
 
 function whileTraining(loss) {
   if (loss == null) {
-    console.log('Training Complete');
+    console.log("Training Complete");
     classifier.classify(gotGestures);
   } else {
     console.log(loss);
@@ -98,13 +99,14 @@ function gotGestures(error, result) {
   }
 }
 
-// OBJEKTERKENNUNG 
+// OBJEKTERKENNUNG
 
 function gotDetections(error, results) {
   if (error) {
     console.error(error);
   }
-  detections = results;
+  detections = results.filter((obj) => obj.label === "person");
+  //console.log('result länge: ' + results.length, detections.length);
   detector.detect(video, gotDetections);
 }
 
@@ -119,8 +121,8 @@ function draw() {
     rect(object.x, object.y, object.width, object.height);
     push();
     noFill();
-    stroke(255,0,0);
-    ellipse (object.x+object.width/2,object.y+object.height,50);
+    stroke(255, 0, 0);
+    ellipse(object.x + object.width / 2, object.y + object.height, 50);
     // fill (0);
     // stroke(0);
     // ellipse (object.x+object.width/2,object.y+object.height/8, object.width/2);
@@ -130,9 +132,8 @@ function draw() {
     textSize(24);
     text(object.label, object.x + 10, object.y + 24);
   }
-  
+
   fill(255);
   textSize(16);
   text(label, 10, height - 10);
-
 }
