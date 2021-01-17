@@ -14,46 +14,42 @@ let normalButton; // wenn man gar keine Geste macht
 let saveButton;
 
 
-function modelReady() {
-  console.log('Model is ready!!!');
- classifier.load('model.json', customModelReady);
-}
-
-function customModelReady(){
-  console.log('Custom Model is ready!');
-}
-
-function videoReady() {
-  console.log('Video is ready!!!');
-}
-
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
   video.size(640, 480);
   video.hide();
-  //
+  
   detector = ml5.objectDetector('cocossd');
   detector.detect(video, gotDetections);
-  //
+
   mobilenet = ml5.featureExtractor('MobileNet', modelReady);
   classifier = mobilenet.classification(video, videoReady);
   
+  let counth = 0;
+  let counte = 0; 
+  let countn = 0;
 
 // Buttons zum lernen 
   helpButton = createButton('Hilfe');
   helpButton.mousePressed(function() {
+    counth += 1;
     classifier.addImage('Hilfe');
+    console.log('Hilfe-Bilder: ' + counth);
   });
 
   endButton = createButton('Ende');
   endButton.mousePressed(function() {
+    counte += 1;
     classifier.addImage('Ende');
+    console.log('Ende_Bilder: ' + counte);
   });
 
   normalButton = createButton('Normal');
   normalButton.mousePressed(function(){
+    countn += 1;
     classifier.addImage('Normal');
+    console.log('Normal-Bilder: ' + countn);
   })
 
   trainButton = createButton('train');
@@ -67,25 +63,38 @@ function setup() {
   });
 }
 
+function modelReady() {
+  console.log('Model is ready!!!');
+ //classifier.load('model.json', customModelReady);
+}
+
+function customModelReady(){
+  console.log('Custom Model is ready!');
+}
+
+function videoReady() {
+  console.log('Video is ready!!!');
+}
+
+// Machine Learning 
+
 function whileTraining(loss) {
   if (loss == null) {
     console.log('Training Complete');
-    classifier.classify(gotResults);
+    classifier.classify(gotGestures);
   } else {
     console.log(loss);
   }
 }
 
-//BILDERKENNUNG
+// BILDERKENNUNG
 
-function gotResults(error, result) {
+function gotGestures(error, result) {
   if (error) {
     console.error(error);
   } else {
-    // updated to work with newer version of ml5
-    // label = result;
     label = result[0].label;
-    classifier.classify(gotResults);
+    classifier.classify(gotGestures);
   }
 }
 
