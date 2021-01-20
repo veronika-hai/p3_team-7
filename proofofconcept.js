@@ -13,6 +13,11 @@ let endButton; // wenn man die Projektion auflöst
 let normalButton; // wenn man gar keine Geste macht
 let saveButton;
 
+// Farbwechsel
+let r;
+let g;
+let b;
+
 function preload() {
   detector = ml5.objectDetector("cocossd");
   mobilenet = ml5.featureExtractor("MobileNet", { numLabels: 3 }, modelReady);
@@ -49,7 +54,7 @@ function setup() {
   normalButton = createButton("Normal");
   normalButton.mousePressed(function () {
     countn += 1;
-    classifier.addImage("bliblablub");
+    classifier.addImage("Normal");
     console.log("Normal-Bilder: " + countn);
   });
 
@@ -121,8 +126,21 @@ function draw() {
     rect(object.x, object.y, object.width, object.height);
     push();
     noFill();
-    stroke(255, 0, 0);
-    ellipse(object.x + object.width / 2, object.y + object.height, 50);
+    if (object.label == "Normal" || object.label == "Ende") {
+      r = 255;
+      g = 255;
+      b = 255;
+    } else if (object.label == "Hilfe") {
+      r = 150;
+      g = 30;
+      b = 100;
+    }
+    stroke(r, g, b);
+    ellipse(
+      object.x + object.width / 2,
+      object.y + object.height,
+      object.width
+    );
     // fill (0);
     // stroke(0);
     // ellipse (object.x+object.width/2,object.y+object.height/8, object.width/2);
