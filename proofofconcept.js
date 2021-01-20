@@ -7,16 +7,19 @@ let detections = [];
 // Bilderkennung => Gestenerkennung
 let mobilenet;
 let classifier;
-let label;
+let gesturelabel;
 let helpButton; // wenn man die Hilfe Geste macht
 let endButton; // wenn man die Projektion auflöst
 let normalButton; // wenn man gar keine Geste macht
 let saveButton;
 
 // Farbwechsel
-let r;
-let g;
-let b;
+let r = 255;
+let g = 255;
+let b = 255;
+
+// Bilder mit Selbstauslöser
+let state = "waiting";
 
 function preload() {
   detector = ml5.objectDetector("cocossd");
@@ -39,23 +42,67 @@ function setup() {
   // Buttons zum lernen
   helpButton = createButton("Hilfe");
   helpButton.mousePressed(function () {
-    counth += 1;
-    classifier.addImage("Hilfe");
-    console.log("Hilfe-Bilder: " + counth);
+    setTimeout(function () {
+      state = "collecting";
+      console.log("collecting");
+
+      if (state == "collecting") {
+        let hilfebilder = [];
+        for (let i = 0; i < 50; i++) {
+          hilfebilder.push(classifier.addImage("Hilfe"));
+          console.log("Hilfe-Bilder");
+        }
+      }
+
+      setTimeout(function () {
+        state = "waiting";
+        console.log("notcollecting");
+      }, 10000);
+    }, 5000);
   });
 
   endButton = createButton("Ende");
   endButton.mousePressed(function () {
-    counte += 1;
+    setTimeout(function () {
+      state = "collecting";
+      console.log("collecting");
+
+      if (state == "collecting") {
+        let endebilder = [];
+        for (let i = 0; i < 50; i++) {
+          endebilder.push(classifier.addImage("Ende"));
+          console.log("Ende-Bilder");
+        }
+      }
+
+      setTimeout(function () {
+        state = "waiting";
+        console.log("notcollecting");
+      }, 10000);
+    }, 5000);
     classifier.addImage("Ende");
-    console.log("Ende_Bilder: " + counte);
+    console.log("Ende-Bilder");
   });
 
   normalButton = createButton("Normal");
   normalButton.mousePressed(function () {
-    countn += 1;
-    classifier.addImage("Normal");
-    console.log("Normal-Bilder: " + countn);
+    setTimeout(function () {
+      state = "collecting";
+      console.log("collecting");
+
+      if (state == "collecting") {
+        let normalbilder = [];
+        for (let i = 0; i < 50; i++) {
+          normalbilder.push(classifier.addImage("Normal")) * i;
+          console.log("Normal-Bilder");
+        }
+      }
+
+      setTimeout(function () {
+        state = "waiting";
+        console.log("notcollecting");
+      }, 10000);
+    }, 5000);
   });
 
   trainButton = createButton("train");
@@ -99,7 +146,7 @@ function gotGestures(error, result) {
   if (error) {
     console.error(error);
   } else {
-    label = result[0].label;
+    gesturelabel = result[0].label;
     classifier.classify(gotGestures);
   }
 }
@@ -126,11 +173,11 @@ function draw() {
     rect(object.x, object.y, object.width, object.height);
     push();
     noFill();
-    if (object.label == "Normal" || object.label == "Ende") {
+    if (gesturelabel == "Normal" || gesturelabel == "Ende") {
       r = 255;
       g = 255;
       b = 255;
-    } else if (object.label == "Hilfe") {
+    } else if (gesturelabel == "Hilfe") {
       r = 150;
       g = 30;
       b = 100;
@@ -153,5 +200,5 @@ function draw() {
 
   fill(255);
   textSize(16);
-  text(label, 10, height - 10);
+  text(gesturelabel, 10, height - 10);
 }
