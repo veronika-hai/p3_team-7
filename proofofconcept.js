@@ -118,7 +118,7 @@ function setup() {
 
 function modelReady() {
   console.log("Model is ready!!!");
-  //classifier.load('model.json', customModelReady);
+  classifier.load("model.json", customModelReady);
 }
 
 function customModelReady() {
@@ -188,9 +188,13 @@ function draw() {
       object.y + object.height,
       object.width
     );
-    // fill (0);
-    // stroke(0);
-    // ellipse (object.x+object.width/2,object.y+object.height/8, object.width/2);
+    fill(140, 140, 140);
+    noStroke();
+    ellipse(
+      object.x + object.width / 2,
+      object.y + object.height / 8,
+      object.width / 2
+    );
     pop();
     noStroke();
     fill(255);
