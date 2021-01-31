@@ -42,6 +42,7 @@ function setup() {
   // Buttons zum lernen
   helpButton = createButton("Hilfe");
   helpButton.mousePressed(function () {
+    // eine Callback Hölle, da ich einen Selbstauslöser brauchte... der Laptop stand auf einem sehr hohen Schrank :D
     setTimeout(function () {
       state = "collecting";
       console.log("collecting");
