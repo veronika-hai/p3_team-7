@@ -8,30 +8,26 @@ let detections = [];
 let mobilenet;
 let classifier;
 let gesturelabel;
+let helpButton; // wenn man die Hilfe Geste macht
+let endButton; // wenn man die Projektion auflöst
+let normalButton; // wenn man gar keine Geste macht
+let saveButton; // um das Trainingsmodell zu speichern
+
+// Counter Bildmenge
+let counth = 0;
+let counte = 0;
+let countn = 0;
 
 // Farbwechsel der Kreise unterhalb der Personen
 let r = 255;
 let g = 255;
 let b = 255;
 
-// Laden das von uns gespeicherte Modell hoch
-function modelReady() {
-  console.log("Model is ready!!!");
-  classifier.load("model.json", customModelReady);
-}
-
-// das Modell, dass man noch trainieren kann
-function customModelReady() {
-  console.log("Custom Model is ready!");
-  classifier.classify(gotGestures);
-}
-
-function videoReady() {
-  console.log("Video is ready!!!");
-}
-
 // API importieren
-function preload() {}
+function preload() {
+  detector = ml5.objectDetector("cocossd");
+  mobilenet = ml5.featureExtractor("MobileNet", { numLabels: 3 }, modelReady);
+}
 
 function setup() {
   // Videokamera capturen
@@ -40,14 +36,73 @@ function setup() {
   video.size(640, 480);
   video.hide();
 
-  // API hochladen
-  detector = ml5.objectDetector("cocossd");
-  mobilenet = ml5.featureExtractor("MobileNet", { numLabels: 3 }, modelReady);
-
   // den beiden APIs sagen, sie sollen im Video arbeiten
   detector.detect(video, gotDetections);
   classifier = mobilenet.classification(video, videoReady);
+
+  // // Buttons zum Bilder aufnehmen, mit Hilfe :)
+  // helpButton = createButton("Hilfe");
+  // helpButton.mousePressed(function () {
+  //   counth += 1;
+  //   classifier.addImage("Hilfe");
+  //   console.log("Hilfe-Bilder: " + counth);
+  // });
+
+  // endButton = createButton("Ende");
+  // endButton.mousePressed(function () {
+  //   counte += 1;
+  //   classifier.addImage("Ende");
+  //   console.log("Ende-Bilder: " + counte);
+  // });
+
+  // normalButton = createButton("Normal");
+  // normalButton.mousePressed(function () {
+  //   countn += 1;
+  //   classifier.addImage("Normal");
+  //   console.log("Normal-Bilder: " + countn);
+  // });
+
+  // // Button zum Lernen
+  // trainButton = createButton("train");
+  // trainButton.mousePressed(function () {
+  //   classifier.train(whileTraining);
+  // });
+
+  // // Button um Trainingsmodell zu speichern
+  // saveButton = createButton("save");
+  // saveButton.mousePressed(function () {
+  //   classifier.save();
+  // });
 }
+
+// Laden das von uns gespeicherte Modell hoch
+function modelReady() {
+  console.log("Model is ready!!!");
+  classifier.load("model.json", customModelReady);
+}
+
+function customModelReady() {
+  console.log("CM ready!!");
+  classifier.classify(gotGestures);
+}
+
+function videoReady() {
+  console.log("Video is ready!!!");
+}
+
+// MACHINE LEARNING
+// loss gibt uns an, wie gut die Maschine die von uns gezeigten Bilder erkennt
+// Modell sagt, ich denke diese Geste ist eine Hilfe-Geste und es ist wirklich eine Hilfe-Geste => loss=0
+// Modell sagt, ich denke diese Geste ist eine Ende-Geste und es ist eigentlich eine Hilfe-Geste => loss!=0
+// wenn dass Modell sicher genug trainiert ist, ist loss am Ende null
+// function whileTraining(loss) {
+//   if (loss == null) {
+//     console.log("Training Complete");
+//     classifier.classify(gotGestures);
+//   } else {
+//     console.log(loss);
+//   }
+// }
 
 // BILDERKENNUNG
 // gibt uns die Namen der Gesten zurück
@@ -92,9 +147,9 @@ function draw() {
       g = 255;
       b = 255;
     } else if (gesturelabel == "Hilfe") {
-      r = 196;
-      g = 77;
-      b = 255;
+      r = 150;
+      g = 30;
+      b = 100;
     }
     // der Kreis unter der Person
     stroke(r, g, b);
