@@ -14,12 +14,6 @@ let r = 255;
 let g = 255;
 let b = 255;
 
-// API importieren
-function preload() {
-  detector = ml5.objectDetector("cocossd");
-  mobilenet = ml5.featureExtractor("MobileNet", { numLabels: 3 }, modelReady);
-}
-
 // Laden das von uns gespeicherte Modell hoch
 function modelReady() {
   console.log("Model is ready!!!");
@@ -34,6 +28,12 @@ function customModelReady() {
 
 function videoReady() {
   console.log("Video is ready!!!");
+}
+
+// API importieren
+function preload() {
+  detector = ml5.objectDetector("cocossd");
+  mobilenet = ml5.featureExtractor("MobileNet", { numLabels: 3 }, modelReady);
 }
 
 function setup() {
