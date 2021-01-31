@@ -150,6 +150,13 @@ function setup() {
 // Laden das von uns gespeicherte Modell hoch
 function modelReady() {
   console.log("Model is ready!!!");
+  classifier.load("model.json", customModelReady);
+  classifier.classify(gotGestures);
+}
+
+// das Modell, dass man noch trainieren kann
+function customModelReady() {
+  console.log("Custom Model is ready!");
 }
 
 function videoReady() {
