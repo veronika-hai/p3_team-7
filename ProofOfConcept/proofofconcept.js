@@ -13,6 +13,11 @@ let endButton; // wenn man die Projektion auflöst
 let normalButton; // wenn man gar keine Geste macht
 let saveButton; // um das Trainingsmodell zu speichern
 
+// Counter Bildmenge
+let counth = 0;
+let counte = 0;
+let countn = 0;
+
 // Farbwechsel der Kreise unterhalb der Personen
 let r = 255;
 let g = 255;
@@ -38,74 +43,96 @@ function setup() {
   detector.detect(video, gotDetections);
   classifier = mobilenet.classification(video, videoReady);
 
-  // Buttons zum Bilder aufnehmen
-  // eine Callback Hölle, da ich einen Selbstauslöser brauchte... der Laptop stand auf einem sehr hohen Schrank :D
-  // wenn ich auf den Button drücke, werden nach 5 Sekunden 50 Bilder aufgenommen (das Aufnehmen dauert 10 Sekunden)
-  // die aufgenommenen Bilder werden in ein Array gepusht, welches dann später für die Erkennung benutzt wird
+  // Buttons zum Bilder aufnehmen, mit Hilfe :)
   helpButton = createButton("Hilfe");
   helpButton.mousePressed(function () {
-    setTimeout(function () {
-      state = "collecting";
-      console.log("collecting");
-
-      if (state == "collecting") {
-        let hilfebilder = [];
-        for (let i = 0; i < 50; i++) {
-          hilfebilder.push(classifier.addImage("Hilfe"));
-          console.log("Hilfe-Bilder");
-        }
-      }
-
-      setTimeout(function () {
-        state = "waiting";
-        console.log("notcollecting");
-      }, 10000);
-    }, 5000);
+    counth += 1;
+    classifier.addImage("Hilfe-Geste");
+    console.log(counth);
   });
 
   endButton = createButton("Ende");
   endButton.mousePressed(function () {
-    setTimeout(function () {
-      state = "collecting";
-      console.log("collecting");
-
-      if (state == "collecting") {
-        let endebilder = [];
-        for (let i = 0; i < 50; i++) {
-          endebilder.push(classifier.addImage("Ende"));
-          console.log("Ende-Bilder");
-        }
-      }
-
-      setTimeout(function () {
-        state = "waiting";
-        console.log("notcollecting");
-      }, 10000);
-    }, 5000);
-    classifier.addImage("Ende");
-    console.log("Ende-Bilder");
+    counte += 1;
+    classifier.addImage("Ende-Geste");
+    console.log(counte);
   });
 
   normalButton = createButton("Normal");
   normalButton.mousePressed(function () {
-    setTimeout(function () {
-      state = "collecting";
-      console.log("collecting");
-
-      if (state == "collecting") {
-        let normalbilder = [];
-        for (let i = 0; i < 50; i++) {
-          normalbilder.push(classifier.addImage("Normal")) * i;
-          console.log("Normal-Bilder");
-        }
-      }
-
-      setTimeout(function () {
-        state = "waiting";
-        console.log("notcollecting");
-      }, 10000);
-    }, 5000);
+    countn += 1;
+    classifier.addImage("Normal-Geste");
+    console.log(countn);
   });
+
+  // // Buttons zum Bilder aufnehmen ohne Hilfe - für die Konzeptpräsi
+  // // eine Callback Hölle, da ich einen Selbstauslöser brauchte... der Laptop stand auf einem sehr hohen Schrank :D
+  // // wenn ich auf den Button drücke, werden nach 5 Sekunden 50 Bilder aufgenommen (das Aufnehmen dauert 10 Sekunden)
+  // // die aufgenommenen Bilder werden in ein Array gepusht, welches dann später für die Erkennung benutzt wird
+  // helpButton = createButton("Hilfe");
+  // helpButton.mousePressed(function () {
+  //   setTimeout(function () {
+  //     state = "collecting";
+  //     console.log("collecting");
+
+  //     if (state == "collecting") {
+  //       let hilfebilder = [];
+  //       for (let i = 0; i < 50; i++) {
+  //         hilfebilder.push(classifier.addImage("Hilfe"));
+  //         console.log("Hilfe-Bilder");
+  //       }
+  //     }
+
+  //     setTimeout(function () {
+  //       state = "waiting";
+  //       console.log("notcollecting");
+  //     }, 10000);
+  //   }, 5000);
+  // });
+
+  // endButton = createButton("Ende");
+  // endButton.mousePressed(function () {
+  //   setTimeout(function () {
+  //     state = "collecting";
+  //     console.log("collecting");
+
+  //     if (state == "collecting") {
+  //       let endebilder = [];
+  //       for (let i = 0; i < 50; i++) {
+  //         endebilder.push(classifier.addImage("Ende"));
+  //         console.log("Ende-Bilder");
+  //       }
+  //     }
+
+  //     setTimeout(function () {
+  //       state = "waiting";
+  //       console.log("notcollecting");
+  //     }, 10000);
+  //   }, 5000);
+  //   classifier.addImage("Ende");
+  //   console.log("Ende-Bilder");
+  // });
+
+  // normalButton = createButton("Normal");
+  // normalButton.mousePressed(function () {
+  //   setTimeout(function () {
+  //     state = "collecting";
+  //     console.log("collecting");
+
+  //     if (state == "collecting") {
+  //       let normalbilder = [];
+  //       for (let i = 0; i < 50; i++) {
+  //         normalbilder.push(classifier.addImage("Normal")) * i;
+  //         console.log("Normal-Bilder");
+  //       }
+  //     }
+
+  //     setTimeout(function () {
+  //       state = "waiting";
+  //       console.log("notcollecting");
+  //     }, 10000);
+  //   }, 5000);
+  // });
 
   // Button zum Lernen
   trainButton = createButton("train");
