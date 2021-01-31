@@ -31,10 +31,7 @@ function videoReady() {
 }
 
 // API importieren
-function preload() {
-  detector = ml5.objectDetector("cocossd");
-  mobilenet = ml5.featureExtractor("MobileNet", { numLabels: 3 }, modelReady);
-}
+function preload() {}
 
 function setup() {
   // Videokamera capturen
@@ -42,6 +39,10 @@ function setup() {
   video = createCapture(VIDEO);
   video.size(640, 480);
   video.hide();
+
+  // API hochladen
+  detector = ml5.objectDetector("cocossd");
+  mobilenet = ml5.featureExtractor("MobileNet", { numLabels: 3 }, modelReady);
 
   // den beiden APIs sagen, sie sollen im Video arbeiten
   detector.detect(video, gotDetections);
