@@ -150,7 +150,7 @@ function setup() {
 // Laden das von uns gespeicherte Modell hoch
 function modelReady() {
   console.log("Model is ready!!!");
-  classifier.load("model.json", customModelReady);
+  // classifier.load("model.json", customModelReady);
 }
 
 // das Modell, dass man noch trainieren kann
