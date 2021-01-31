@@ -47,21 +47,21 @@ function setup() {
   helpButton = createButton("Hilfe");
   helpButton.mousePressed(function () {
     counth += 1;
-    classifier.addImage("Hilfe-Geste");
+    classifier.addImage("Hilfe");
     console.log("Hilfe-Bilder: " + counth);
   });
 
   endButton = createButton("Ende");
   endButton.mousePressed(function () {
     counte += 1;
-    classifier.addImage("Ende-Geste");
+    classifier.addImage("Ende");
     console.log("Ende-Bilder: " + counte);
   });
 
   normalButton = createButton("Normal");
   normalButton.mousePressed(function () {
     countn += 1;
-    classifier.addImage("Normal-Geste");
+    classifier.addImage("Normal");
     console.log("Normal-Bilder: " + countn);
   });
 
@@ -150,7 +150,7 @@ function setup() {
 // Laden das von uns gespeicherte Modell hoch
 function modelReady() {
   console.log("Model is ready!!!");
-  // classifier.load("model.json", customModelReady);
+  classifier.load("model.json", customModelReady);
 }
 
 // das Modell, dass man noch trainieren kann
