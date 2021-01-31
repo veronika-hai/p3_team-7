@@ -48,21 +48,21 @@ function setup() {
   helpButton.mousePressed(function () {
     counth += 1;
     classifier.addImage("Hilfe-Geste");
-    console.log(counth);
+    console.log("Hilfe-Bilder: " + counth);
   });
 
   endButton = createButton("Ende");
   endButton.mousePressed(function () {
     counte += 1;
     classifier.addImage("Ende-Geste");
-    console.log(counte);
+    console.log("Ende-Bilder: " + counte);
   });
 
   normalButton = createButton("Normal");
   normalButton.mousePressed(function () {
     countn += 1;
     classifier.addImage("Normal-Geste");
-    console.log(countn);
+    console.log("Normal-Bilder: " + countn);
   });
 
   // // Buttons zum Bilder aufnehmen ohne Hilfe - für die Konzeptpräsi
