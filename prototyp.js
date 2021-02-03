@@ -10,9 +10,10 @@ let classifier;
 let gesturelabel;
 
 // Farbwechsel der Kreise unterhalb der Personen
-let r = 255;
-let g = 255;
-let b = 255;
+let r;
+let g;
+let b;
+let state = "Alright";
 
 // API importieren
 function preload() {
@@ -83,16 +84,27 @@ function draw() {
     rect(object.x, object.y, object.width, object.height);
     push();
     noFill();
-    // wenn Normal oder Ende Geste, dann ist Kreis weiß
+    // wenn Normal Geste, dann ist Kreis weiß
     // wenn man Hilfe Geste macht, wird der Kreis farbig
-    if (gesturelabel == "Normal" || gesturelabel == "Ende") {
-      r = 255;
-      g = 255;
-      b = 255;
+    // nur wenn man Hilfe Geste vorher gemacht hat, beendet Ende Geste den Zustand
+    if (gesturelabel == "Normal" && state !== "Help") {
+      state = "Alright";
     } else if (gesturelabel == "Hilfe") {
-      r = 150;
-      g = 30;
-      b = 100;
+      state = "Help";
+    }
+    if (gesturelabel == "Ende" && state == "Help") {
+      state = "Alright";
+    }
+    // Kreisfarbe ändern
+    if (state == "Alright") {
+      r = 240;
+      g = 240;
+      b = 240;
+    }
+    if (state == "Help") {
+      r = 196;
+      g = 77;
+      b = 255;
     }
     // der Kreis unter der Person
     stroke(r, g, b);
