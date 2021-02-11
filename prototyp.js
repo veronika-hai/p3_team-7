@@ -77,11 +77,6 @@ function draw() {
   // Loop, um alle erkannten Objekte durchzugehen (wichtig, wenn wir mehrere Personen aufeinmal erkennen)
   for (let i = 0; i < detections.length; i++) {
     let object = detections[i];
-    stroke(0, 255, 0);
-    strokeWeight(4);
-    noFill();
-    // eine Box um das Objekt herum
-    rect(object.x, object.y, object.width, object.height);
     push();
     noFill();
     // wenn Normal Geste, dann ist Kreis weiß
