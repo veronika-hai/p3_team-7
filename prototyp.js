@@ -55,6 +55,7 @@ function gotGestures(error, result) {
     console.error(error);
   } else {
     gesturelabel = result[0].label;
+    console.log(result);
     classifier.classify(gotGestures);
   }
 }
