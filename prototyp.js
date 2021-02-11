@@ -54,7 +54,7 @@ function gotGestures(error, result) {
   if (error) {
     console.error(error);
   } else {
-    gesturelabel = result[0].label;
+    gesturelabel = result[0].label; // result[0] ist die Geste mit der höchsten Wahrscheinlichkeit
     console.log(result);
     classifier.classify(gotGestures);
   }
@@ -62,7 +62,8 @@ function gotGestures(error, result) {
 
 // OBJEKTERKENNUNG
 // gibt uns nur die Objekte zurück, die auch als Personen erkannt wurden
-// es gibt 80 Klassen, die man erkennen kann... wir brauchen nur Personen
+// es gibt 90 Klassen, die man erkennen kann... wir brauchen nur Personen
+//https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts
 function gotDetections(error, results) {
   if (error) {
     console.error(error);
