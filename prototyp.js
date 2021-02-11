@@ -105,6 +105,15 @@ function draw() {
       r = 196;
       g = 77;
       b = 255;
+      let a = 255;
+      for (let i = 0; i < 300; i++) {
+        stroke(r, g, b, a - 35 * i);
+        ellipse(
+          object.x + object.width / 2,
+          object.y + object.height,
+          object.width + 50 * i
+        );
+      }
     }
     // der Kreis unter der Person
     stroke(r, g, b);
