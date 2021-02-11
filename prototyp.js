@@ -103,6 +103,7 @@ function draw() {
       let a = 255;
       for (let i = 0; i < 300; i++) {
         stroke(r, g, b, a - 35 * i);
+        strokeWeight(3);
         ellipse(
           object.x + object.width / 2,
           object.y + object.height,
