@@ -16,11 +16,11 @@ function preload() {
 function setup() {
   // Videokamera capturen
   createCanvas(640, 480);
-  video = createCapture(VIDEO);
-  video.size(640, 480);
-  video.hide();
+  // video = createCapture(VIDEO);
+  // video.size(640, 480);
+  // video.hide();
 
-  classifier = mobilenet.classification(bild1, customModelReady);
+  classifier = mobilenet.classification(bild1, imageReady);
 }
 
 // Laden das von uns gespeicherte Modell hoch
@@ -51,13 +51,12 @@ function gotGestures(error, result) {
 }
 
 function imageReady() {
-  image(bild1, 0, 0, width, height);
+  image(bild1, 0, 0);
 }
 
 function draw() {
-  clear();
-  image(video, 0, 0);
-  bild1 = createImg("images/hilfe.jpg", imageReady);
+  //image(video, 0, 0);
+  bild1 = createImg("images/hilfe.png", imageReady);
   bild1.hide();
 
   // unten links steht, welche Geste die Maschine erkennt
