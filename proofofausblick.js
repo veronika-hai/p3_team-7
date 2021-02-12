@@ -1,6 +1,6 @@
 let video; // webcam
 
-// Bilderkennung => Gestenerkennung
+// Bilderkennung => für Gestenerkennung
 let mobilenet;
 let classifier;
 let gesturelabel;
