@@ -115,6 +115,7 @@ function draw() {
     }
     // der Kreis unter der Person
     stroke(r, g, b);
+    strokeWeight(3);
     ellipse(
       object.x + object.width / 2,
       object.y + object.height,
@@ -129,11 +130,6 @@ function draw() {
       object.width / 2
     );
     pop();
-    // oben in der Box steht Klasse des Objekts, also Person... weil wir erkennen ja nur Personen
-    noStroke();
-    fill(255);
-    textSize(24);
-    text(object.label, object.x + 10, object.y + 24);
   }
 
   // unten links steht, welche Geste die Maschine erkennt
