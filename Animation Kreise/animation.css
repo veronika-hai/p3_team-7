@@ -1,0 +1,119 @@
+/* Zeichnen des Hintergrungs und dem Style der Kreise */
+.circle {
+  /* background-color: #c44dff; */
+  /* background-color: #ffffff; */
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 20%;
+  left: 40%;
+  border: 10px;
+  border-style: solid;
+  /* border-color: #c44dff; */
+  border-radius: 100%;
+  border-color: #c44dff;
+}
+
+/* Zeichen der verschiedenen Kreise die mit einem delay gezeichnet werden */
+.animation {
+  position: absolute;
+  animation-name: spread;
+  animation-delay: 0s;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+  /* animation-fill-mode: backwards; */
+}
+.animation1 {
+  position: absolute;
+  animation-name: spread;
+  animation-duration: 3s;
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+
+.animation2 {
+  position: absolute;
+  animation-name: spread;
+  animation-duration: 3s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+
+.animation3 {
+  position: absolute;
+  animation-name: spread2;
+  animation-duration: 3s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+
+.animation4 {
+  position: absolute;
+  animation-name: spread2;
+  animation-duration: 3s;
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+
+.animation5 {
+  position: absolute;
+  animation-name: spread2;
+  animation-duration: 3s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+
+/* .animation6 {
+  position: absolute;
+  animation-name: spread;
+  animation-duration: 3s;
+  animation-delay: 7s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+.animation7 {
+  position: absolute;
+  animation-name: spread;
+  animation-duration: 3s;
+  animation-delay: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+} */
+
+@keyframes spread {
+  0% {
+    transform: scale(0);
+    /* width: 0px;
+    height: 0px; */
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    /* width: 500px;
+    height: 500px; */
+    /* top: -20%; */
+    opacity: 0.5;
+  }
+}
+
+@keyframes spread2 {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(1.5);
+    /* width: 500px;
+    height: 500px; */
+    /* top: -20%; */
+    opacity: 0;
+  }
+}
