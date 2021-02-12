@@ -54,14 +54,16 @@ function gotGestures(error, result) {
   if (error) {
     console.error(error);
   } else {
-    gesturelabel = result[0].label;
+    gesturelabel = result[0].label; // result[0] ist die Geste mit der höchsten Wahrscheinlichkeit
+    console.log(result);
     classifier.classify(gotGestures);
   }
 }
 
 // OBJEKTERKENNUNG
 // gibt uns nur die Objekte zurück, die auch als Personen erkannt wurden
-// es gibt 80 Klassen, die man erkennen kann... wir brauchen nur Personen
+// es gibt 90 Klassen, die man erkennen kann... wir brauchen nur Personen
+//https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts
 function gotDetections(error, results) {
   if (error) {
     console.error(error);
@@ -77,11 +79,6 @@ function draw() {
   // Loop, um alle erkannten Objekte durchzugehen (wichtig, wenn wir mehrere Personen aufeinmal erkennen)
   for (let i = 0; i < detections.length; i++) {
     let object = detections[i];
-    stroke(0, 255, 0);
-    strokeWeight(4);
-    noFill();
-    // eine Box um das Objekt herum
-    rect(object.x, object.y, object.width, object.height);
     push();
     noFill();
     // wenn Normal Geste, dann ist Kreis weiß
@@ -105,6 +102,16 @@ function draw() {
       r = 196;
       g = 77;
       b = 255;
+      let a = 255;
+      for (let i = 0; i < 300; i++) {
+        stroke(r, g, b, a - 35 * i);
+        strokeWeight(3);
+        ellipse(
+          object.x + object.width / 2,
+          object.y + object.height,
+          object.width + 50 * i
+        );
+      }
     }
     // der Kreis unter der Person
     stroke(r, g, b);
