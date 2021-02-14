@@ -20,7 +20,7 @@ function setup() {
   // video.size(640, 480);
   // video.hide();
 
-  classifier = mobilenet.classification(bild1, imageReady);
+  classifier = mobilenet.classification();
 }
 
 // Laden das von uns gespeicherte Modell hoch
@@ -31,7 +31,6 @@ function modelReady() {
 
 function customModelReady() {
   console.log("CM ready!!");
-  classifier.classify(gotGestures);
 }
 
 function videoReady() {
@@ -46,12 +45,12 @@ function gotGestures(error, result) {
   } else {
     gesturelabel = result[0].label; // result[0] ist die Geste mit der höchsten Wahrscheinlichkeit
     console.log(result);
-    classifier.classify(gotGestures);
   }
 }
 
 function imageReady() {
   image(bild1, 0, 0);
+  classifier.classify(bild1, gotGestures);
 }
 
 function draw() {
