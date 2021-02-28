@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="stylesheet.css" rel="stylesheet" />
+    <style>
+      body {
+        background-color: #591126;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <img id="beginning" src="Logo.png" alt="Logo" />
+      <button id="startbtn" onclick="changeImg()">Start</button>
+    </div>
+
+    <script>
+      let img1 = document.getElementById("beginning");
+      let img2 = document.createElement("img");
+      img2.src = "Sound.png";
+
+      function changeImg() {
+        img1.animate(
+          [
+            {
+              opacity: 1,
+            },
+            {
+              opacity: 0,
+            },
+          ],
+          {
+            duration: 3000,
+            iterations: 1,
+            fill: "forwards",
+          }
+        );
+
+        // img1.replaceWith(img2);
+
+        let button = document.getElementById("startbtn");
+        if (button.style.display === "none") {
+          button.style.display = "block";
+        } else {
+          button.style.display = "none";
+        }
+      }
+
+      setTimeout(function () {
+        console.log(img1.style.opacity);
+      }, 5000);
+    </script>
+  </body>
+</html>
