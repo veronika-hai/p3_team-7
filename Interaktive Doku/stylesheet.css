@@ -26,7 +26,7 @@ body {
   top: 0;
   left: 0;
   object-fit: cover;
-  width: 100%;
+  width: auto;
   height: 100%;
 }
 
@@ -45,26 +45,10 @@ body {
   border-radius: 5px;
 }
 
-.opacityanimation {
-  position: absolute;
-  animation-name: spread;
-  animation-duration: 3s;
-  animation-timing-function: ease-out;
-}
-
-@keyframes spread {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 #soundan {
   position: absolute;
   top: 70vh;
-  left: 44vw;
+  left: auto;
   background-color: #fcdbdb;
   color: #591126;
   text-align: center;
