@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Caring Cat</title>
     <link href="stylesheet.css" rel="stylesheet" />
     <style>
       body {
@@ -10,14 +11,18 @@
   </head>
   <body>
     <div class="banner">
-      <img id="beginning" src="Logo.png" alt="Logo" />
       <button id="startbtn" onclick="changeImg()">Start</button>
+      <button id="soundan" onclick="startVid()">Start</button>
+      <img id="beginning" src="Logo.png" alt="Logo" />
     </div>
 
     <script>
       let img1 = document.getElementById("beginning");
       let img2 = document.createElement("img");
       img2.src = "Sound.png";
+
+      let btnstart = document.getElementById("startbtn");
+      let btnsound = document.getElementById("soundan");
 
       function changeImg() {
         img1.animate(
@@ -30,25 +35,37 @@
             },
           ],
           {
-            duration: 3000,
+            duration: 1500,
             iterations: 1,
             fill: "forwards",
           }
         );
 
-        // img1.replaceWith(img2);
+        setTimeout(function replace1() {
+          img1.replaceWith(img2);
+          img2.animate(
+            [
+              {
+                opacity: 0,
+              },
+              {
+                opacity: 1,
+              },
+            ],
+            {
+              duration: 1500,
+              iterations: 1,
+              fill: "forwards",
+            }
+          );
+        }, 1500);
 
-        let button = document.getElementById("startbtn");
-        if (button.style.display === "none") {
-          button.style.display = "block";
+        if (btnstart.style.display === "none") {
+          btnstart.style.display = "block";
         } else {
-          button.style.display = "none";
+          btnstart.style.display = "none";
         }
       }
-
-      setTimeout(function () {
-        console.log(img1.style.opacity);
-      }, 5000);
     </script>
   </body>
 </html>

@@ -13,19 +13,20 @@ body {
 }
 
 .banner img {
-  /* position: absolute; */
   top: 0;
   left: 0;
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
+
 #startbtn {
   position: absolute;
-  top: 51.3%;
-  left: 46.5%;
+  top: 50vh;
+  left: auto;
   background-color: #fcdbdb;
   color: #591126;
+  text-align: center;
   font-size: 30px;
   font-family: Merriweather;
   padding: 12px 24px;
@@ -48,4 +49,20 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+#soundan {
+  position: absolute;
+  top: 80vh;
+  left: auto;
+  background-color: #fcdbdb;
+  color: #591126;
+  text-align: center;
+  font-size: 30px;
+  font-family: Merriweather;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  display: none;
 }
