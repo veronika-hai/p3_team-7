@@ -3,69 +3,21 @@
   <head>
     <title>Caring Cat</title>
     <link href="stylesheet.css" rel="stylesheet" />
-    <style>
-      body {
-        background-color: #591126;
-      }
-    </style>
+
+    <script src="p5.min.js" type="module"></script>
+    <script src="p5setup.js" type="module"></script>
+    <script src="script.js" type="module"></script>
   </head>
+
   <body>
     <div class="banner">
       <button id="startbtn" onclick="changeImg()">Start</button>
-      <button id="soundan" onclick="startVid()">Start</button>
       <img id="beginning" src="Logo.png" alt="Logo" />
+
+      <video controls id="catcall1" src="cat1.mp4">
+        <source src="movie.ogg" type="video/ogg" />
+        Your browser does not support the video tag.
+      </video>
     </div>
-
-    <script>
-      let img1 = document.getElementById("beginning");
-      let img2 = document.createElement("img");
-      img2.src = "Sound.png";
-
-      let btnstart = document.getElementById("startbtn");
-      let btnsound = document.getElementById("soundan");
-
-      function changeImg() {
-        img1.animate(
-          [
-            {
-              opacity: 1,
-            },
-            {
-              opacity: 0,
-            },
-          ],
-          {
-            duration: 1500,
-            iterations: 1,
-            fill: "forwards",
-          }
-        );
-
-        setTimeout(function replace1() {
-          img1.replaceWith(img2);
-          img2.animate(
-            [
-              {
-                opacity: 0,
-              },
-              {
-                opacity: 1,
-              },
-            ],
-            {
-              duration: 1500,
-              iterations: 1,
-              fill: "forwards",
-            }
-          );
-        }, 1500);
-
-        if (btnstart.style.display === "none") {
-          btnstart.style.display = "block";
-        } else {
-          btnstart.style.display = "none";
-        }
-      }
-    </script>
   </body>
 </html>
