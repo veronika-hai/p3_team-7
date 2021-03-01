@@ -60,6 +60,100 @@ body {
   border-radius: 5px;
 }
 
-#catcall1 {
+#catcallvid1 {
   display: none;
+}
+
+#catcalls {
+  position: absolute;
+  top: 50vh;
+  left: 26vw;
+  background-color: #fcdbdb;
+  color: #591126;
+  text-align: center;
+  font-size: 30px;
+  font-family: Merriweather;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#catcalls2 {
+  position: absolute;
+  top: 70vh;
+  left: 30vw;
+  background-color: #fcdbdb;
+  color: #591126;
+  text-align: center;
+  font-size: 30px;
+  font-family: Merriweather;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#quizstart {
+  position: absolute;
+  top: 70vh;
+  left: auto;
+  background-color: #fcdbdb;
+  color: #591126;
+  text-align: center;
+  font-size: 30px;
+  font-family: Merriweather;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.banner .tasks {
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  width: auto;
+  height: 100%;
+}
+#answer1 {
+  position: absolute;
+  top: 50vh;
+  left: 75vw;
+  background-color: #591126;
+  color: #fcdbdb;
+  text-align: center;
+  font-size: 25px;
+  font-family: Merriweather;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#answer2 {
+  position: absolute;
+  top: 65vh;
+  left: 81vw;
+  background-color: #591126;
+  color: #fcdbdb;
+  text-align: center;
+  font-size: 25px;
+  font-family: Merriweather;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#answer3 {
+  position: absolute;
+  top: 80vh;
+  left: 79vw;
+  background-color: #591126;
+  color: #fcdbdb;
+  text-align: center;
+  font-size: 25px;
+  font-family: Merriweather;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
