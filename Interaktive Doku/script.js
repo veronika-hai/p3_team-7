@@ -67,6 +67,11 @@ vid4.src = "cat4.mp4";
 vid4.id = "systemvid";
 vid4.setAttribute("controls", "controls");
 
+//AUDIO
+let audio1 = document.getElementById("audio1");
+let audio2 = document.getElementById("audio2");
+let audio3 = document.getElementById("audio3");
+
 function changeImg() {
   img1.animate(
     [
@@ -434,6 +439,9 @@ window.quizstart = quizstart;
 
 function answer1() {
   img7.remove();
+  btnanswer1.remove();
+  btnanswer2.remove();
+  btnanswer3.remove();
   img6.animate(
     [
       {
@@ -449,7 +457,132 @@ function answer1() {
       fill: "forwards",
     }
   );
+
   setTimeout(function picanswer1() {
     img6.replaceWith(img8);
+    img8.animate(
+      [
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+        },
+      ],
+      {
+        duration: 1500,
+        iterations: 1,
+        fill: "forwards",
+      }
+    );
   }, 1500);
+
+  setTimeout(function audioplay() {
+    audio1.play();
+  }, 2000);
+
+  audio1.onended = function () {
+    // anderes bild
+  };
 }
+window.answer1 = answer1;
+
+function answer2() {
+  img7.remove();
+  btnanswer1.remove();
+  btnanswer2.remove();
+  btnanswer3.remove();
+  img6.animate(
+    [
+      {
+        opacity: 1,
+      },
+      {
+        opacity: 0,
+      },
+    ],
+    {
+      duration: 1500,
+      iterations: 1,
+      fill: "forwards",
+    }
+  );
+
+  setTimeout(function picanswer1() {
+    img6.replaceWith(img8);
+    img8.animate(
+      [
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+        },
+      ],
+      {
+        duration: 1500,
+        iterations: 1,
+        fill: "forwards",
+      }
+    );
+  }, 1500);
+
+  setTimeout(function audioplay() {
+    audio2.play();
+  }, 2000);
+
+  audio2.onended = function () {
+    // anderes bild
+  };
+}
+window.answer2 = answer2;
+
+function answer3() {
+  img7.remove();
+  btnanswer1.remove();
+  btnanswer2.remove();
+  btnanswer3.remove();
+  img6.animate(
+    [
+      {
+        opacity: 1,
+      },
+      {
+        opacity: 0,
+      },
+    ],
+    {
+      duration: 1500,
+      iterations: 1,
+      fill: "forwards",
+    }
+  );
+
+  setTimeout(function picanswer1() {
+    img6.replaceWith(img8);
+    img8.animate(
+      [
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+        },
+      ],
+      {
+        duration: 1500,
+        iterations: 1,
+        fill: "forwards",
+      }
+    );
+  }, 1500);
+
+  setTimeout(function audioplay() {
+    audio3.play();
+  }, 2000);
+
+  audio3.onended = function () {
+    // anderes bild
+  };
+}
+window.answer3 = answer3;
