@@ -19,13 +19,24 @@
         <source src="movie.ogg" type="video/ogg" />
         Your browser does not support the video tag.
       </video>
-      <audio id="audio1">
+
+      <audio id="audio1" onended="gestenvid()">
         <source src="answer1.mp3" type="audio/mpeg" />
       </audio>
-      <audio id="audio2">
+      <audio id="audio2" onended="gestenvid()">
         <source src="answer2.mp3" type="audio/mpeg" />
       </audio>
-      <audio id="audio3">
+      <audio id="audio3" onended="gestenvid()">
+        <source src="answer3.mp3" type="audio/mpeg" />
+      </audio>
+
+      <audio id="audio1wg" onended="backtot2()">
+        <source src="answer1.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio2wg" onended="backtot2()">
+        <source src="answer2.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio3wg" onended="backtot2()">
         <source src="answer3.mp3" type="audio/mpeg" />
       </audio>
     </div>

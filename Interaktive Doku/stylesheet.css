@@ -115,7 +115,7 @@ body {
   width: auto;
   height: 100%;
 }
-#answer1 {
+.a1 {
   position: absolute;
   top: 50vh;
   left: 75.5vw;
@@ -129,7 +129,7 @@ body {
   cursor: pointer;
   border-radius: 5px;
 }
-#answer2 {
+.a2 {
   position: absolute;
   top: 65vh;
   left: 81.5vw;
@@ -143,7 +143,7 @@ body {
   cursor: pointer;
   border-radius: 5px;
 }
-#answer3 {
+.a3 {
   position: absolute;
   top: 80vh;
   left: 79.5vw;
@@ -159,4 +159,13 @@ body {
 }
 #audio1 {
   display: "none";
+}
+#selectb {
+  position: absolute;
+  top: 6.8vh;
+  left: 83.9vw;
+  padding: 45px 45px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
